@@ -17,7 +17,6 @@ RUN apk --no-cache add ca-certificates sqlite-libs
 
 WORKDIR /root/
 COPY --from=builder /app/task-management-backend .
-COPY --from=builder /app/.env .
 
 RUN mkdir -p /root/data
 
