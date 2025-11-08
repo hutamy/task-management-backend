@@ -3,6 +3,7 @@ package config
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/caarlos0/env/v11"
 	"github.com/joho/godotenv"
@@ -19,17 +20,17 @@ type Config struct {
 
 var configuration Config
 
-func LoadEnv() (Config, error) {
+func LoadEnv() Config {
 	err := godotenv.Load()
 	if err != nil {
-		return Config{}, err
+		log.Printf("No .env file found or failed to load .env file: %v", err)
 	}
 
 	if err := env.Parse(&configuration); err != nil {
-		return Config{}, err
+		log.Fatalf("failed to parse environment variables: %v", err)
 	}
 
-	return configuration, nil
+	return configuration
 }
 
 func GetConfig() Config {

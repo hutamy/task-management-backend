@@ -17,11 +17,7 @@ import (
 )
 
 func main() {
-	cfg, err := config.LoadEnv()
-	if err != nil {
-		log.Fatalf("Failed to load .env file: %v", err)
-	}
-
+	cfg := config.LoadEnv()
 	db, err := config.InitDB(cfg.DatabaseURL)
 	if err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
